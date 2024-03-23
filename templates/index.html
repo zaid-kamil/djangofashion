@@ -78,6 +78,14 @@
           </li>
           <li><a href="services.html">Services</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="{% url 'slogin' %}">Seller</a></li>
+          <li class="dropdown"><a href="#"><span>Account</span> <i
+                class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li> <a href="{% url 'clogin' %}">Login</a></li>
+              <li><a href="{% url 'cregister' %}">Register</a></li>
+            </ul>
+          </li>
         </ul>
       </nav><!-- .navbar -->
 
