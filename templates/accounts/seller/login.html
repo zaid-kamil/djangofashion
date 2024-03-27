@@ -31,6 +31,8 @@
                             Login
                         </div>
                         <div class="card-body">
+                            {% csrf_token %}
+                            <input type="hidden" name="group" name="seller">
                             <form method="post" action="">
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
