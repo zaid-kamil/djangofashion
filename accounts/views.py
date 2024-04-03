@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import ProfileForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def customer_login(request):
@@ -95,12 +96,14 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
-
+@login_required
 def create_profile(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
             return redirect('home')
     else:
         form = ProfileForm()
