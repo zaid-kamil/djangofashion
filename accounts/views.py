@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import ProfileForm
 from django.contrib.auth.decorators import login_required
+from .models import Profile
 
 # Create your views here.
 def customer_login(request):
@@ -106,5 +107,9 @@ def create_profile(request):
             profile.save()
             return redirect('home')
     else:
-        form = ProfileForm()
+        profile = Profile.objects.filter(user=request.user).first()
+        if profile:
+            form = ProfileForm(instance=profile)
+        else:
+            form = ProfileForm()
     return render(request, 'accounts/create_profile.html', {'form': form})
